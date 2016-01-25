@@ -56,8 +56,10 @@ class EnemyShip extends SpaceObject
   {
       pushMatrix();
       translate(pos.x, pos.y);
-      text(+ health, 5 ,10);
       fill(255);
+      strokeWeight(1);
+      stroke(0);
+      text(+ health, 5 ,10);
       rect(- halfW, - halfW, w/2, w/2);
       rect(-36,-10,10,-5);
       popMatrix();

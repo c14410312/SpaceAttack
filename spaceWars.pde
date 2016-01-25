@@ -1,7 +1,7 @@
 void setup()
 {
    size(800,500);
-  smooth(); 
+   smooth(); 
    AllyShip AShip = new AllyShip('W', 'A', 'D','S', ' ', width * 0.25, height* 0.5);
    spaceObjects.add(AShip);
    General gShip = new General(width, height);
@@ -53,11 +53,20 @@ void draw()
  }
  
  // Create a powerup every 20 seconds
-  if (frameCount % 1200 == 0)
+  if (frameCount % 600 == 0)
   {
     SpaceObject powerup = null;
-    powerup = new HealthPowerup();
-     
+    
+    int i = (int) random(0,2);
+    switch(i)
+    {
+       case 0:
+         powerup = new HealthPowerup();
+         break;
+       case 1:       
+         powerup = new Shield();
+         break;
+    }
     spaceObjects.add(powerup);
   }
  
@@ -157,7 +166,7 @@ void CheckPowerupCollisions()
       for(int j = spaceObjects.size() - 1 ; j >= 0   ;j --)
       {
         SpaceObject other = spaceObjects.get(j);
-        if (other instanceof HealthPowerup) // Check the type of a object
+        if (other instanceof HealthPowerup || other instanceof Shield) // Check the type of a object
         {
           // Bounding circle collisions
           if (so.pos.dist(other.pos) < so.halfW + other.halfW)

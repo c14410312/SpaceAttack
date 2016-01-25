@@ -7,6 +7,9 @@ class AllyShip extends SpaceObject
   char down;
   char shoot;
   
+  boolean shield = false;
+  int shieldHealth;
+  
   
   AllyShip()
   {
@@ -82,13 +85,24 @@ class AllyShip extends SpaceObject
       text("Health: " + health,20 , 20);
       text("Score: " + score,20 , 40);
       
+      //displays shield health if active
+      if(shield == true)
+      {
+        text("Shield: " + shieldHealth,20 , 60);
+      }
+      
       if(health <= 0)
       {
         spaceObjects.remove(this);
       }
       
-      
-      
+      //removes shield if health under 0
+      if(shieldHealth <= 0)
+      {
+        shield = false;
+        shieldHealth = 0;
+      }
+     
   }
   
   
@@ -97,11 +111,22 @@ class AllyShip extends SpaceObject
   {
      pushMatrix(); // reset the translation and rotation
      translate(pos.x, pos.y);
+     strokeWeight(1);
      stroke(255);
      fill(255);
      rect(0, - halfW, 15,40);
      rect(15, 0- halfW, 10, 2);
      rect(15,13, 10, 2);
+     
+     //if shield collected
+     if(shield == true)
+     {
+        noFill();
+        strokeWeight(3);
+        stroke(0,255,0);
+        ellipse(halfW/2,-5, w,w); 
+     }
+     
      popMatrix();
   }
   

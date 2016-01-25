@@ -12,6 +12,7 @@ class HealthPowerup extends SpaceObject implements AffectAlly
     pushMatrix();
     translate(pos.x, pos.y);
     fill(255);
+    strokeWeight(1);
     rect(- halfW, - halfW, halfW, halfW);
     text("Health", -30, halfW);
     popMatrix();

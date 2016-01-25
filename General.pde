@@ -58,6 +58,8 @@ class General extends SpaceObject
       pushMatrix();
       translate(pos.x, pos.y);
       text(+ health, 5 ,10);
+      strokeWeight(1);
+      noStroke();
       fill(255);
       rect(- halfW, - halfW, w/2, w*2);
       rect(-36,-20,10,-5);

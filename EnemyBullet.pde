@@ -5,7 +5,10 @@ class EnemyBullet extends SpaceObject implements AffectAlly
   {
      pushMatrix();
      translate(pos.x, pos.y);
-     line(0, -halfW/2, 5, -halfW/2);
+     fill(0,0,250);
+     strokeWeight(1);
+     stroke(200,0,0);
+     ellipse(0, -halfW/2, 20 , 2 );
      popMatrix();
   }   
   
@@ -23,6 +26,14 @@ class EnemyBullet extends SpaceObject implements AffectAlly
   
   void applyTo(AllyShip AShip)
   {
-    AShip.health -= 5;
+    //deducts health
+    if(AShip.shield == true)
+    {
+       AShip.shieldHealth -= 5; 
+    }
+    else
+    {
+      AShip.health -= 5;
+    }
   }
 }
