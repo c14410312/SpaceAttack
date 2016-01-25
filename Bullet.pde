@@ -5,6 +5,11 @@ class Bullet extends SpaceObject implements AffectEnemy
   {
     enemy.health -= 25;
   }
+  
+  void applyTo(General gShip)
+  {
+    gShip.health -= 25;
+  }
  
    void render()
   {

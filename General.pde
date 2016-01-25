@@ -8,7 +8,7 @@ class General extends SpaceObject
    General(float startX, float startY)
   {
      super(startX, startY, 50); 
-     health = 500;
+     health = 1000;
      int elapsed;
   }
   
@@ -35,13 +35,13 @@ class General extends SpaceObject
       pos.y -= speed *0.5;
     }
     
-    if(elapsed > 40)
+    if(elapsed > 120)
     {
       for(int i = 0; i < 4; i ++)
       {
           EnemyBullet ebullet = new EnemyBullet();
           ebullet.pos.x = pos.x;
-          ebullet.pos.y = pos.y  + (i * 20);
+          ebullet.pos.y = pos.y  + (i * 25);
           spaceObjects.add(ebullet);
        }
        elapsed = 0;

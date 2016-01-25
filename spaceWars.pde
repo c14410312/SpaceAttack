@@ -4,8 +4,7 @@ void setup()
    smooth(); 
    AllyShip AShip = new AllyShip('W', 'A', 'D','S', ' ', width * 0.25, height* 0.5);
    spaceObjects.add(AShip);
-   General gShip = new General(width, height);
-   spaceObjects.add(gShip);
+   
 }
 
 
@@ -68,6 +67,12 @@ void draw()
          break;
     }
     spaceObjects.add(powerup);
+  }
+  
+  if(frameCount % 3000 == 0)
+  {
+    General gShip = new General(width, height);
+    spaceObjects.add(gShip); 
   }
  
  //collision function calls
@@ -136,7 +141,7 @@ void checkAllyBulletHits()
  for(int i = spaceObjects.size() - 1 ; i >= 0   ;i --)
  {
     SpaceObject so = spaceObjects.get(i);
-    if (so instanceof EnemyShip)
+    if (so instanceof EnemyShip || so instanceof General)
     {
       for(int j = spaceObjects.size() - 1 ; j >= 0   ;j --)
       {
@@ -147,7 +152,14 @@ void checkAllyBulletHits()
           if (so.pos.dist(other.pos) < so.halfW + other.halfW)
           {
             // Do some casting
-            ((AffectEnemy) other).applyTo((EnemyShip)so);
+            if(so instanceof EnemyShip)
+            {
+              ((AffectEnemy) other).applyTo((EnemyShip)so);
+            }
+            if(so instanceof General)
+            {
+              ((AffectEnemy) other).applyTo((General)so);
+            }
             spaceObjects.remove(other);
           }
         }
