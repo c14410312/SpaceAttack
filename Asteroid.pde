@@ -48,7 +48,14 @@ class Asteroid extends SpaceObject implements AffectAlly
   
   void applyTo(AllyShip AShip)
   {
-    AShip.health -= 25;
+    if(AShip.shield == true)
+    {
+       AShip.shieldHealth -= 25; 
+    }
+    else
+    {
+      AShip.health -= 25;
+    }
     spaceObjects.remove(this);
   }
 }

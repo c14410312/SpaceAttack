@@ -34,8 +34,8 @@ void draw()
    so.render();
  }
  
- //creates asteroids and enemy ships every second
- if(frameCount % 60 == 0)
+ //creates asteroids and enemy ships every 3/4 second
+ if(frameCount % 40 == 0)
  {
    SpaceObject enemy = null;
    
@@ -148,6 +148,22 @@ void checkAllyBulletHits()
           {
             // Do some casting
             ((AffectEnemy) other).applyTo((EnemyShip)so);
+            spaceObjects.remove(other);
+          }
+        }
+      }
+    }
+    if(so instanceof Asteroid)
+    {
+      for(int j = spaceObjects.size() - 1 ; j >= 0   ;j --)
+      {
+        SpaceObject other = spaceObjects.get(j);
+        if (other instanceof Bullet || other instanceof EnemyBullet) // Check the type of a object
+        {
+          // Bounding circle collisions
+          if (so.pos.dist(other.pos) < so.halfW + other.halfW)
+          {
+            // Do some casting
             spaceObjects.remove(other);
           }
         }

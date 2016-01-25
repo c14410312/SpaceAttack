@@ -9,6 +9,7 @@ class General extends SpaceObject
   {
      super(startX, startY, 50); 
      health = 500;
+     int elapsed;
   }
   
   void update()
@@ -33,6 +34,18 @@ class General extends SpaceObject
     {
       pos.y -= speed *0.5;
     }
+    
+    if(elapsed > 40)
+    {
+      for(int i = 0; i < 4; i ++)
+      {
+          EnemyBullet ebullet = new EnemyBullet();
+          ebullet.pos.x = pos.x;
+          ebullet.pos.y = pos.y  + (i * 20);
+          spaceObjects.add(ebullet);
+       }
+       elapsed = 0;
+    }
 
     
     //removes general and adds points when general killed
@@ -51,6 +64,8 @@ class General extends SpaceObject
           }
         }
     }
+    
+    elapsed ++;
   }
   
   void render()
