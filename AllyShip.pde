@@ -6,8 +6,10 @@ class AllyShip extends SpaceObject
   char right;
   char down;
   char shoot;
+  char weapChange;
   
   boolean shield = false;
+  boolean rocket = false;
   int shieldHealth;
   
   
@@ -17,7 +19,7 @@ class AllyShip extends SpaceObject
      println("Default Ship Constructer");
   }
   
-  AllyShip(char up, char left, char right, char down, char shoot, float startX, float startY)
+  AllyShip(char up, char left, char right, char down, char shoot, char weapChange, float startX, float startY)
   {
      super(startX, startY, 50); 
      this.up = up;
@@ -25,6 +27,7 @@ class AllyShip extends SpaceObject
      this.right = right;
      this.down = down;
      this.shoot = shoot;
+     this.weapChange = weapChange;
      health = 100;
      score = 0;
   }
@@ -50,7 +53,7 @@ class AllyShip extends SpaceObject
         pos.x += speed;
       }
       
-      if(keys[shoot] && elapsed > 6)
+      if(keys[shoot] && elapsed > 6 && rocket == false)
       {
         for(int i=0; i < 2; i++)
         {
@@ -60,6 +63,21 @@ class AllyShip extends SpaceObject
           spaceObjects.add(bullet);
           elapsed = 0 ;
         }
+      }
+      
+      if(keys[shoot] && elapsed > 6 && rocket == true)
+      {
+        Rocket rocket = new Rocket();
+        rocket.pos.x = pos.x;
+        rocket.pos.y = pos.y;
+        spaceObjects.add(rocket);
+        elapsed = 0 ;
+      }
+      
+      //switches to rocket if N is pressed
+      if(keys[weapChange])
+      {
+        rocket = !rocket;
       }
       
       //checks to ensure ship stays within the screenplay
@@ -126,7 +144,7 @@ class AllyShip extends SpaceObject
      {
         noFill();
         strokeWeight(3);
-        stroke(0,255,0);
+        stroke(0,255,255);
         ellipse(halfW/2,-5, w,w); 
      }
      

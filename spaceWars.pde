@@ -2,7 +2,7 @@ void setup()
 {
    size(800,500);
    smooth(); 
-   AllyShip AShip = new AllyShip('W', 'A', 'D','S', ' ', width * 0.25, height* 0.5);
+   AllyShip AShip = new AllyShip('W', 'A', 'D','S', ' ','N', width * 0.25, height* 0.5);
    spaceObjects.add(AShip);
    
 }
@@ -146,7 +146,7 @@ void checkAllyBulletHits()
       for(int j = spaceObjects.size() - 1 ; j >= 0   ;j --)
       {
         SpaceObject other = spaceObjects.get(j);
-        if (other instanceof Bullet) // Check the type of a object
+        if (other instanceof Bullet || other instanceof Rocket) // Check the type of a object
         {
           // Bounding circle collisions
           if (so.pos.dist(other.pos) < so.halfW/2 + other.halfW/2)
@@ -167,7 +167,7 @@ void checkAllyBulletHits()
         }
       }
     }
-    if(so instanceof Bullet || so instanceof EnemyBullet)
+    if(so instanceof Bullet || so instanceof EnemyBullet || so instanceof Rocket)
     {
       for(int j = spaceObjects.size() - 1 ; j >= 0   ;j --)
       {
@@ -177,8 +177,17 @@ void checkAllyBulletHits()
           // Bounding circle collisions
           if (so.pos.dist(other.pos) <= so.halfW/2 + other.halfW/2)
           {
-            // Do some casting
-            spaceObjects.remove(so);
+            //removes bullets if they hit asteroid
+            if(so instanceof Bullet || so instanceof EnemyBullet)
+            {
+              spaceObjects.remove(so);
+            }
+            //removes the asteroid if hit by rocket
+            if(so instanceof Rocket)
+            {
+              spaceObjects.remove(so);
+              spaceObjects.remove(other);
+            }
           }
         }
       }
