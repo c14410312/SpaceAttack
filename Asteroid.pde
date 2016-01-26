@@ -1,6 +1,7 @@
 class Asteroid extends SpaceObject implements AffectAlly
 {
    float thetaDir;
+   float place;
   
    Asteroid()
    {
@@ -9,6 +10,7 @@ class Asteroid extends SpaceObject implements AffectAlly
       forward.y = random(-1, 1);
       forward.normalize();
       thetaDir = random(-0.1f, 0.1f);
+      place = random(10,25);
    }
    
    void render()
@@ -19,25 +21,20 @@ class Asteroid extends SpaceObject implements AffectAlly
     strokeWeight(1);
     stroke(255);
     rotate(theta);
-    float lastX = 0; float lastY = - halfW;
-    int sides = 6;
-    float thetaInc = TWO_PI / sides;
-    for(int i = 0 ; i <= sides ; i ++)
-    {
-      float t = i * thetaInc;
-      float x = sin(t) * halfW;
-      float y = -cos(t) * halfW;
-      line(lastX, lastY, x, y);
-      lastX = x;
-      lastY = y;
-    }
+    ellipse(halfW,-halfW, 50, 50);
+    stroke(0);
+    ellipse(halfW-10,-halfW, 10, 10);
+    ellipse(halfW+10,-halfW + place, 20, 20);
+    ellipse(halfW+10,-halfW - place, 20, 20);
+    noStroke();
+    ellipse(halfW-10,-halfW +place, 20, 20);
     popMatrix();
   }
   
   void update()
   {
      pos.x -= speed*0.5; 
-     theta += thetaDir;
+     //theta += 0.01f;
      
     //removes Asteroid from array list when out of bounds
     if (pos.x < 0 || pos.y < 0 || pos.x > width || pos.y > height)

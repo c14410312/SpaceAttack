@@ -1,4 +1,4 @@
-class SpaceObject
+abstract class SpaceObject
 {
    PVector pos;
    PVector forward;
@@ -27,12 +27,8 @@ class SpaceObject
      this.theta = 0.0f;
    }
    
-   void update()
-   {
-   }
-   
-   void render()
-   {
-   }
+   abstract void update();
+   abstract void render();
+
    
 }

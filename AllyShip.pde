@@ -52,11 +52,14 @@ class AllyShip extends SpaceObject
       
       if(keys[shoot] && elapsed > 6)
       {
-        Bullet bullet = new Bullet();
-        bullet.pos.x = pos.x;
-        bullet.pos.y = pos.y;
-        spaceObjects.add(bullet);
-        elapsed = 0 ;
+        for(int i=0; i < 2; i++)
+        {
+          Bullet bullet = new Bullet();
+          bullet.pos.x = pos.x;
+          bullet.pos.y = pos.y  + (i * 40);
+          spaceObjects.add(bullet);
+          elapsed = 0 ;
+        }
       }
       
       //checks to ensure ship stays within the screenplay

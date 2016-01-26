@@ -69,11 +69,11 @@ void draw()
     spaceObjects.add(powerup);
   }
   
-  if(frameCount % 3000 == 0)
+  /*if(frameCount % 3000 == 0)
   {
     General gShip = new General(width, height);
     spaceObjects.add(gShip); 
-  }
+  }*/
  
  //collision function calls
  checkEnemyBulletHits(); 
@@ -149,13 +149,15 @@ void checkAllyBulletHits()
         if (other instanceof Bullet) // Check the type of a object
         {
           // Bounding circle collisions
-          if (so.pos.dist(other.pos) < so.halfW + other.halfW)
+          if (so.pos.dist(other.pos) < so.halfW/2 + other.halfW/2)
           {
             // Do some casting
             if(so instanceof EnemyShip)
             {
               ((AffectEnemy) other).applyTo((EnemyShip)so);
             }
+            
+            
             if(so instanceof General)
             {
               ((AffectEnemy) other).applyTo((General)so);
@@ -165,18 +167,18 @@ void checkAllyBulletHits()
         }
       }
     }
-    if(so instanceof Asteroid)
+    if(so instanceof Bullet || so instanceof EnemyBullet)
     {
       for(int j = spaceObjects.size() - 1 ; j >= 0   ;j --)
       {
         SpaceObject other = spaceObjects.get(j);
-        if (other instanceof Bullet || other instanceof EnemyBullet) // Check the type of a object
+        if (other instanceof Asteroid) // Check the type of a object
         {
           // Bounding circle collisions
-          if (so.pos.dist(other.pos) < so.halfW + other.halfW)
+          if (so.pos.dist(other.pos) <= so.halfW/2 + other.halfW/2)
           {
             // Do some casting
-            spaceObjects.remove(other);
+            spaceObjects.remove(so);
           }
         }
       }
