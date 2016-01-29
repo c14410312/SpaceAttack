@@ -29,6 +29,10 @@ abstract class SpaceObject
    
    abstract void update();
    abstract void render();
-
+   
+   void explode(float posX, float posY, float s)
+   {
+      
+   }
    
 }

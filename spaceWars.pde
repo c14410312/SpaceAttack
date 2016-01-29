@@ -11,6 +11,7 @@ void setup()
 ArrayList<SpaceObject> spaceObjects = new ArrayList<SpaceObject>();
 
 boolean[] keys = new boolean[512];
+boolean generalPresent = false;
 
 void keyPressed()
 {
@@ -31,24 +32,25 @@ void draw()
    SpaceObject so = spaceObjects.get(i);
    so.update();
    so.render();
- }
+ }        
  
  //creates asteroids and enemy ships every 3/4 second
  if(frameCount % 40 == 0)
  {
-   SpaceObject enemy = null;
    
-   int i = (int) random(0,2);
-   switch(i)
-   {
-     case 0:
-       enemy = new EnemyShip(width, random(0,height));
-       break;
-     case 1:
-       enemy = new Asteroid();
-       break;
-   }
-   spaceObjects.add(enemy);
+         SpaceObject enemy = null;
+         
+         int i = (int) random(0,2);
+         switch(i)
+         {
+           case 0:
+             enemy = new EnemyShip(width, random(0,height));
+             break;
+           case 1:
+             enemy = new Asteroid();
+             break;
+         }
+         spaceObjects.add(enemy);
  }
  
  // Create a powerup every 20 seconds
@@ -69,7 +71,7 @@ void draw()
     spaceObjects.add(powerup);
   }
   
-  /*if(frameCount % 3000 == 0)
+  /*if(frameCount % 500 == 0)
   {
     General gShip = new General(width, height);
     spaceObjects.add(gShip); 
@@ -167,7 +169,7 @@ void checkAllyBulletHits()
         }
       }
     }
-    if(so instanceof Bullet || so instanceof EnemyBullet || so instanceof Rocket)
+    if(so instanceof Bullet || so instanceof EnemyBullet)
     {
       for(int j = spaceObjects.size() - 1 ; j >= 0   ;j --)
       {
@@ -181,12 +183,6 @@ void checkAllyBulletHits()
             if(so instanceof Bullet || so instanceof EnemyBullet)
             {
               spaceObjects.remove(so);
-            }
-            //removes the asteroid if hit by rocket
-            if(so instanceof Rocket)
-            {
-              spaceObjects.remove(so);
-              spaceObjects.remove(other);
             }
           }
         }
@@ -219,4 +215,3 @@ void CheckPowerupCollisions()
     }
  } 
 }
-

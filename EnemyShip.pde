@@ -29,18 +29,24 @@ class EnemyShip extends SpaceObject
     //removes enemy ship if health below 1
     if(health <= 0)
     {
-      spaceObjects.remove(this);
-      
-      //adds points onto the allyships score board
-      for(int i =0; i < spaceObjects.size();i++)
-        {
-          SpaceObject so = spaceObjects.get(i);
-          if (so instanceof AllyShip)
+      //allow explosion to execute before removing
+      if(frameCount % 60 == 0)
+      {
+        spaceObjects.remove(this);
+        
+         //adds points onto the allyships score board
+        for(int i =0; i < spaceObjects.size();i++)
           {
-            so.score += 20;
-            println("Dead");
+            SpaceObject so = spaceObjects.get(i);
+            if (so instanceof AllyShip)
+            {
+              so.score += 20;
+              println("Dead");
+            }
           }
-        }
+      }
+      
+     
     }
       
     //removes EnemyShip from array list when out of bounds
@@ -56,12 +62,24 @@ class EnemyShip extends SpaceObject
   {
       pushMatrix();
       translate(pos.x, pos.y);
-      fill(255);
+      if(health > 0)
+      {
+        fill(255);
+      }
+      else
+      {
+        fill(0);
+      }
       strokeWeight(1);
       stroke(0);
       text(+ health, 5 ,10);
       rect(- halfW, - halfW, w/2, w/2);
       rect(-36,-10,10,-5);
+      
+      if(health <= 0)
+      {
+        explode(-halfW,-halfW,w);
+      }
       popMatrix();
   }
 }

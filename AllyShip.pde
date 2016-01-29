@@ -65,7 +65,7 @@ class AllyShip extends SpaceObject
         }
       }
       
-      if(keys[shoot] && elapsed > 6 && rocket == true)
+      if(keys[shoot] && elapsed > 20 && rocket == true)
       {
         Rocket rocket = new Rocket();
         rocket.pos.x = pos.x;

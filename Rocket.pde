@@ -31,7 +31,7 @@ class Rocket extends SpaceObject implements AffectEnemy
   void update()
   {
     forward.mult(speed);
-    pos.x += speed*2;
+    pos.x += speed*2.5;
     
     //removes bullet from array list when out of bounds
     if (pos.x < 0 || pos.y < 0 || pos.x > width || pos.y > height)
