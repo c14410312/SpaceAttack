@@ -139,15 +139,18 @@ class AllyShip extends SpaceObject
      stroke(255);
      if(health > 0)
       {
-        fill(255);
+        fill(51,153,255);
+        noStroke();
       }
       else
       {
         fill(0);
       }
-     rect(0, - halfW, 15,40);
-     rect(15, 0- halfW, 10, 2);
-     rect(15,13, 10, 2);
+     //main body
+     arc(15, -5, 60, 40,  HALF_PI,PI+HALF_PI);
+     //for guns
+     rect(15, 0- halfW, 15, 2);
+     rect(15,13, 15, 2);
      
      //if shield collected
      if(shield == true)
@@ -155,7 +158,7 @@ class AllyShip extends SpaceObject
         noFill();
         strokeWeight(3);
         stroke(0,255,255);
-        ellipse(halfW/2,-5, w,w); 
+        ellipse(halfW/2,-5, w+10,w+10); 
      }
      
      if(health <= 0)

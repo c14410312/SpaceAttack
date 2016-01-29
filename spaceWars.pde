@@ -70,8 +70,8 @@ void draw()
     }
     spaceObjects.add(powerup);
   }
-  
-  /*if(frameCount % 500 == 0)
+ /* 
+  if(frameCount % 1000 == 0)
   {
     General gShip = new General(width, height);
     spaceObjects.add(gShip); 
