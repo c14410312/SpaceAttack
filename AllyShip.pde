@@ -114,7 +114,10 @@ class AllyShip extends SpaceObject
       
       if(health <= 0)
       {
-        spaceObjects.remove(this);
+        if(frameCount % 60 == 0)
+        {
+          spaceObjects.remove(this);
+        }
       }
       
       //removes shield if health under 0
@@ -134,7 +137,14 @@ class AllyShip extends SpaceObject
      translate(pos.x, pos.y);
      strokeWeight(1);
      stroke(255);
-     fill(255);
+     if(health > 0)
+      {
+        fill(255);
+      }
+      else
+      {
+        fill(0);
+      }
      rect(0, - halfW, 15,40);
      rect(15, 0- halfW, 10, 2);
      rect(15,13, 10, 2);
@@ -147,6 +157,11 @@ class AllyShip extends SpaceObject
         stroke(0,255,255);
         ellipse(halfW/2,-5, w,w); 
      }
+     
+     if(health <= 0)
+      {
+        explode(-halfW,-halfW);
+      }
      
      popMatrix();
   }

@@ -78,7 +78,7 @@ class EnemyShip extends SpaceObject
       
       if(health <= 0)
       {
-        explode(-halfW,-halfW,w);
+        explode(-halfW,-halfW);
       }
       popMatrix();
   }

@@ -30,9 +30,51 @@ abstract class SpaceObject
    abstract void update();
    abstract void render();
    
-   void explode(float posX, float posY, float s)
+   void explode(float posX, float posY)
    {
+      float lastX = posX; float lastY =posY;
+      float thetaInc = TWO_PI / 4;
       
+      //creates outter red explosion
+      for(int i = 0 ; i < 5;i++)
+      {
+          float t = i * thetaInc;
+          float x = sin(t) * 20;
+          float y = -cos(t) * 20;
+          
+          fill(255,0,0);
+          noStroke();
+          ellipse(lastX,lastY, 50,50);
+          lastX = x;
+          lastY = y;
+      }
+      
+      //creates orange explosion
+      for(int i = 0 ; i < 5;i++)
+      {
+          float t = i * thetaInc;
+          float x = sin(t) * 25;
+          float y = -cos(t) * 25;
+          
+          fill(255,128,0);
+          noStroke();
+          ellipse(lastX,lastY, 40,40);
+          lastX = x;
+          lastY = y;
+      }
+      
+      for(int i = 0 ; i < 5;i++)
+      {
+          float t = i * thetaInc;
+          float x = sin(t) * 15;
+          float y = -cos(t) * 15;
+          
+          fill(255,255,0);
+          noStroke();
+          ellipse(lastX,lastY, 25,25);
+          lastX = x;
+          lastY = y;
+      }
    }
    
 }
