@@ -54,11 +54,11 @@ void draw()
  }
  
  // Create a powerup every 20 seconds
-  if (frameCount % 60 == 0)
+  if (frameCount % 600 == 0)
   {
     SpaceObject powerup = null;
     
-    int i = (int) random(0,2);
+    int i = (int) random(0,3);
     switch(i)
     {
        case 0:
@@ -66,6 +66,9 @@ void draw()
          break;
        case 1:       
          powerup = new Shield();
+         break;
+       case 2:
+         powerup = new RocketPowerUp();
          break;
     }
     spaceObjects.add(powerup);
@@ -151,7 +154,7 @@ void checkAllyBulletHits()
         if (other instanceof Bullet || other instanceof Rocket) // Check the type of a object
         {
           // Bounding circle collisions
-          if (so.pos.dist(other.pos) < so.halfW/2 + other.halfW/2)
+          if (so.pos.dist(other.pos) < so.halfW + other.halfW)
           {
             // Do some casting
             if(so instanceof EnemyShip)
@@ -201,7 +204,7 @@ void CheckPowerupCollisions()
       for(int j = spaceObjects.size() - 1 ; j >= 0   ;j --)
       {
         SpaceObject other = spaceObjects.get(j);
-        if (other instanceof HealthPowerup || other instanceof Shield) // Check the type of a object
+        if (other instanceof HealthPowerup || other instanceof Shield || other instanceof RocketPowerUp) // Check the type of a object
         {
           // Bounding circle collisions
           if (so.pos.dist(other.pos) < so.halfW + other.halfW)

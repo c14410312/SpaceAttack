@@ -11,6 +11,7 @@ class AllyShip extends SpaceObject
   boolean shield = false;
   boolean rocket = false;
   int shieldHealth;
+  int rocketShells;
   
   
   AllyShip()
@@ -30,6 +31,7 @@ class AllyShip extends SpaceObject
      this.weapChange = weapChange;
      health = 100;
      score = 0;
+     rocketShells = 0;
   }
   
   
@@ -53,7 +55,7 @@ class AllyShip extends SpaceObject
         pos.x += speed;
       }
       
-      if(keys[shoot] && elapsed > 6 && rocket == false)
+      if(keys[shoot] && elapsed > 12 && rocket == false)
       {
         for(int i=0; i < 2; i++)
         {
@@ -65,13 +67,14 @@ class AllyShip extends SpaceObject
         }
       }
       
-      if(keys[shoot] && elapsed > 20 && rocket == true)
+      if(keys[shoot] && elapsed > 20 && rocket == true && rocketShells > 0)
       {
         Rocket rocket = new Rocket();
         rocket.pos.x = pos.x;
         rocket.pos.y = pos.y;
         spaceObjects.add(rocket);
         elapsed = 0 ;
+        rocketShells --;
       }
       
       //switches to rocket if N is pressed
@@ -103,13 +106,15 @@ class AllyShip extends SpaceObject
       
       elapsed ++;
       
+      fill(255);
       text("Health: " + health,20 , 20);
       text("Score: " + score,20 , 40);
+      text("Rockets: " + rocketShells,20 , 60);
       
       //displays shield health if active
       if(shield == true)
       {
-        text("Shield: " + shieldHealth,20 , 60);
+        text("Shield: " + shieldHealth,20 , 80);
       }
       
       if(health <= 0)
