@@ -4,7 +4,6 @@ void setup()
    smooth(); 
    AllyShip AShip = new AllyShip('W', 'A', 'D','S', ' ','N', width * 0.25, height* 0.5);
    spaceObjects.add(AShip);
-   
 }
 
 
@@ -26,6 +25,7 @@ void keyReleased()
 void draw()
 {
    background(0);
+   
    
  for(int i = spaceObjects.size() - 1; i >= 0; i --)
  {
@@ -54,7 +54,7 @@ void draw()
  }
  
  // Create a powerup every 20 seconds
-  if (frameCount % 600 == 0)
+  if (frameCount % 60 == 0)
   {
     SpaceObject powerup = null;
     
@@ -71,7 +71,7 @@ void draw()
     spaceObjects.add(powerup);
   }
  /* 
-  if(frameCount % 1000 == 0)
+  if(frameCount % 3600 == 0)
   {
     General gShip = new General(width, height);
     spaceObjects.add(gShip); 

@@ -64,17 +64,23 @@ class EnemyShip extends SpaceObject
       translate(pos.x, pos.y);
       if(health > 0)
       {
-        fill(255);
+        fill(0,255,0);
       }
       else
       {
         fill(0);
       }
-      strokeWeight(1);
-      stroke(0);
+      noStroke();
       text(+ health, 5 ,10);
-      rect(- halfW, - halfW, w/2, w/2);
-      rect(-36,-10,10,-5);
+      //green
+      arc(5, -10, 60, 40,  HALF_PI,PI+HALF_PI);
+      rect(-36,-8,10,-5);
+      //white
+      fill(255);
+      arc(5, -10, 60, 20,  HALF_PI,PI+HALF_PI);
+      //purple
+      fill(255,0,255);
+      arc(5, -10, 60, 5,  HALF_PI,PI+HALF_PI);
       
       if(health <= 0)
       {

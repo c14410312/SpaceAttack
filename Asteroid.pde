@@ -17,9 +17,9 @@ class Asteroid extends SpaceObject implements AffectAlly
   {
     pushMatrix();
     translate(pos.x, pos.y);
-    fill(255);
+    fill(153,76,0);
     strokeWeight(1);
-    stroke(255);
+    noStroke();
     rotate(theta);
     ellipse(halfW,-halfW, 50, 50);
     stroke(0);

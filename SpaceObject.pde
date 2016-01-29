@@ -12,6 +12,7 @@ abstract class SpaceObject
    int dead;
    int score;
    boolean dir;
+   color c; 
    
    SpaceObject()
    {
