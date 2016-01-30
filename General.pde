@@ -54,6 +54,10 @@ class General extends SpaceObject
     //removes general and adds points when general killed
     if(health <= 0)
     {
+      textSize(50);
+      fill(0,200,0);
+      text("General Defeated", width/4, height/2);
+      
       if(frameCount % 60 == 0)
       {
         invaderkilled.rewind();

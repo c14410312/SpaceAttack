@@ -9,6 +9,12 @@ void setup()
    smooth(); 
    AllyShip AShip = new AllyShip('W', 'A', 'D','S', ' ','N', width * 0.25, height* 0.5);
    spaceObjects.add(AShip);
+   
+   //in Game track
+    AudioPlayer track;
+    track = minim.loadFile("soundtrack.mp3");
+    track.rewind();
+    track.play(); 
 }
 
 
@@ -16,6 +22,8 @@ ArrayList<SpaceObject> spaceObjects = new ArrayList<SpaceObject>();
 
 boolean[] keys = new boolean[512];
 int timer = 0;
+int screen = 0;
+PImage img;
 
 
 void keyPressed()
@@ -38,80 +46,100 @@ void draw()
    SpaceObject so = spaceObjects.get(i);
    so.update();
    so.render();
- }   
+ } 
 
- //increments timer every second
- if(frameCount % 60 == 0)
- {
-    timer ++;
- }//end if 
- 
- //creates asteroids and enemy ships every 3/4 second
- 
- if(frameCount % 40 == 0 && timer <= 60)
- {
-   
-         SpaceObject enemy = null;
-         
-         int i = (int) random(0,2);
-         switch(i)
-         {
-           case 0:
-             enemy = new EnemyShip(width, random(0,height));
-             break;
-           case 1:
-             enemy = new Asteroid();
-             break;
-         }
-         spaceObjects.add(enemy);
- }
- 
- // Create a powerup every 20 seconds
-  if (frameCount % 600 == 0)
-  {
-    SpaceObject powerup = null;
-    
-    int i = (int) random(0,3);
-    switch(i)
-    {
-       case 0:
-         powerup = new HealthPowerup();
-         break;
-       case 1:       
-         powerup = new Shield();
-         break;
-       case 2:
-         powerup = new RocketPowerUp();
-         break;
-    }
-    spaceObjects.add(powerup);
+ if(keys['1'])
+  { 
+    screen = 1;
   }
   
-  if(timer == 60)
-  {
-    //waits an extra second in order for timer to be greater than 60 or else multiple ships created
-    textSize(50);
-    fill(0,200,0);
-    text("General Deployed", width/4, height/2);
-    if(frameCount % 60 == 0)
-    {
-      AudioPlayer general;
-      general = minim.loadFile("General.wav");
-      general.rewind();
-      general.play();
-      
-      General gShip = new General(width, height);
-      spaceObjects.add(gShip);
-    }
-  }//
-  
-  
  
- //collision function calls
- checkEnemyBulletHits(); 
- checkAsteroidHits();
- checkAllyBulletHits();
- CheckPowerupCollisions();
+ if(screen == 0)
+ {
+        
+   img = loadImage("menu_background.jpg");
+   img.resize(width,height);
+   image(img, 0, 0);
+   //calls menu function
+   menu();
+ }
+ 
+ if (screen == 1)
+ {
+
+         //increments timer every second
+         if(frameCount % 60 == 0)
+         {
+            timer ++;
+         }//end if 
+         
+         //creates asteroids and enemy ships every 3/4 second
+         
+         if(frameCount % 40 == 0 && timer <= 60)
+         {
+           
+                 SpaceObject enemy = null;
+                 
+                 int i = (int) random(0,2);
+                 switch(i)
+                 {
+                   case 0:
+                     enemy = new EnemyShip(width, random(0,height));
+                     break;
+                   case 1:
+                     enemy = new Asteroid();
+                     break;
+                 }
+                 spaceObjects.add(enemy);
+         }
+         
+         // Create a powerup every 20 seconds
+          if (frameCount % 600 == 0)
+          {
+            SpaceObject powerup = null;
+            
+            int i = (int) random(0,3);
+            switch(i)
+            {
+               case 0:
+                 powerup = new HealthPowerup();
+                 break;
+               case 1:       
+                 powerup = new Shield();
+                 break;
+               case 2:
+                 powerup = new RocketPowerUp();
+                 break;
+            }
+            spaceObjects.add(powerup);
+          }
+          
+          if(timer == 60)
+          {
+            //waits an extra second in order for timer to be greater than 60 or else multiple ships created
+            textSize(50);
+            fill(0,200,0);
+            text("General Deployed", width/4, height/2);
+            if(frameCount % 60 == 0)
+            {
+              AudioPlayer general;
+              general = minim.loadFile("General.wav");
+              general.rewind();
+              general.play();
+              
+              General gShip = new General(width, height);
+              spaceObjects.add(gShip);
+            }
+          }//
+          
+          
+         
+         //collision function calls
+         checkEnemyBulletHits(); 
+         checkAsteroidHits();
+         checkAllyBulletHits();
+         CheckPowerupCollisions();
+ }//end screen 1
  
 }
 
@@ -248,4 +276,17 @@ void CheckPowerupCollisions()
       }
     }
  } 
+}
+
+//function to load up the menu screen
+void menu()
+{
+   textSize(18);
+   text("Welcome to Space Wars",300,300);
+   
+   textSize(16);
+   text("Press 1: Start Game",300,370);
+   text("Press 2: High Scores",300,390);
+   text("Press 3: Instructions",300,410);
+   text("Press 4: Exit",300,430);
 }
