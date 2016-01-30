@@ -24,6 +24,7 @@ boolean[] keys = new boolean[512];
 int timer = 0;
 int screen = 0;
 PImage img;
+int level = 1;
 
 
 void keyPressed()
@@ -57,11 +58,9 @@ void draw()
  if(screen == 0)
  {
         
-   img = loadImage("menu_background.jpg");
+   img = loadImage("menu_background_1.jpg");
    img.resize(width,height);
    image(img, 0, 0);
-   //calls menu function
-   menu();
  }
  
  if (screen == 1)
@@ -75,9 +74,9 @@ void draw()
          
          //creates asteroids and enemy ships every 3/4 second
          
-         if(frameCount % 40 == 0 && timer <= 60)
+         if(level == 1 && frameCount % 40 == 0 && timer <= 60)
          {
-           
+                 println(level);
                  SpaceObject enemy = null;
                  
                  int i = (int) random(0,2);
@@ -129,10 +128,11 @@ void draw()
               
               General gShip = new General(width, height);
               spaceObjects.add(gShip);
+              
+              
             }
           }//
-          
-          
+
          
          //collision function calls
          checkEnemyBulletHits(); 
@@ -278,17 +278,3 @@ void CheckPowerupCollisions()
  } 
 }
 
-//function to load up the menu screen
-void menu()
-{
-   fill(122);
-   rect(width/4, width/4, 350,500);
-
-   
-   textSize(20);
-   fill(255);
-   text("Press 1: Start Game",250,370);
-   text("Press 2: High Scores",250,390);
-   text("Press 3: Instructions",250,410);
-   text("Press 4: Exit",250,430);
-}

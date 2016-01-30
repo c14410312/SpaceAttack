@@ -71,6 +71,8 @@ class General extends SpaceObject
             if (so instanceof AllyShip)
             {
               so.score += 150;
+              level = 1;
+              timer = 0;
               println("General Dead");
             }
           }
