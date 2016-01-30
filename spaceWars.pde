@@ -40,7 +40,13 @@ void keyReleased()
 void draw()
 {
    background(0);
-   
+   if(timer < 3)
+   {
+     textSize(50);
+     fill(255);
+     textAlign(CENTER, CENTER);
+     text("Level" + level, width/2, height/2);
+   }
    
  for(int i = spaceObjects.size() - 1; i >= 0; i --)
  {
@@ -74,7 +80,7 @@ void draw()
          
          //creates asteroids and enemy ships every 3/4 second
          
-         if(level == 1 && frameCount % 40 == 0 && timer <= 60)
+         if(level == 1 && frameCount % 40 == 0 && timer <= 120)
          {
            
                  SpaceObject enemy = null;
@@ -113,7 +119,7 @@ void draw()
             spaceObjects.add(powerup);
           }
           
-          if(timer == 60)
+          if(timer == 120)
           {
             //waits an extra second in order for timer to be greater than 60 or else multiple ships created
             textSize(50);
