@@ -1,5 +1,10 @@
+import ddf.minim.*;
+
+Minim minim;
+
 void setup()
 {
+   minim = new Minim(this);
    size(800,500);
    smooth(); 
    AllyShip AShip = new AllyShip('W', 'A', 'D','S', ' ','N', width * 0.25, height* 0.5);
@@ -10,7 +15,8 @@ void setup()
 ArrayList<SpaceObject> spaceObjects = new ArrayList<SpaceObject>();
 
 boolean[] keys = new boolean[512];
-boolean generalPresent = false;
+int timer = 0;
+
 
 void keyPressed()
 {
@@ -32,10 +38,17 @@ void draw()
    SpaceObject so = spaceObjects.get(i);
    so.update();
    so.render();
- }        
+ }   
+
+ //increments timer every second
+ if(frameCount % 60 == 0)
+ {
+    timer ++;
+ }//end if 
  
  //creates asteroids and enemy ships every 3/4 second
- if(frameCount % 40 == 0)
+ 
+ if(frameCount % 40 == 0 && timer <= 60)
  {
    
          SpaceObject enemy = null;
@@ -73,12 +86,26 @@ void draw()
     }
     spaceObjects.add(powerup);
   }
- /* 
-  if(frameCount % 3600 == 0)
+  
+  if(timer == 60)
   {
-    General gShip = new General(width, height);
-    spaceObjects.add(gShip); 
-  }*/
+    //waits an extra second in order for timer to be greater than 60 or else multiple ships created
+    textSize(50);
+    fill(0,200,0);
+    text("General Deployed", width/4, height/2);
+    if(frameCount % 60 == 0)
+    {
+      AudioPlayer general;
+      general = minim.loadFile("General.wav");
+      general.rewind();
+      general.play();
+      
+      General gShip = new General(width, height);
+      spaceObjects.add(gShip);
+    }
+  }//
+  
+  
  
  //collision function calls
  checkEnemyBulletHits(); 
@@ -209,6 +236,10 @@ void CheckPowerupCollisions()
           // Bounding circle collisions
           if (so.pos.dist(other.pos) < so.halfW + other.halfW)
           {
+            AudioPlayer powerup;
+            powerup = minim.loadFile("powerup.wav");
+            powerup.rewind();
+            powerup.play(); 
             // Do some casting
             ((AffectAlly) other).applyTo((AllyShip)so);
             spaceObjects.remove(other);

@@ -12,6 +12,9 @@ class AllyShip extends SpaceObject
   boolean rocket = false;
   int shieldHealth;
   int rocketShells;
+  AudioPlayer shoots;
+  AudioPlayer bottlerocket;
+  AudioPlayer explosion;
   
   
   AllyShip()
@@ -32,6 +35,9 @@ class AllyShip extends SpaceObject
      health = 100;
      score = 0;
      rocketShells = 0;
+     shoots = minim.loadFile("shoot.wav");
+     explosion = minim.loadFile("explosion.wav");
+     bottlerocket = minim.loadFile("bottlerocket.wav");
   }
   
   
@@ -57,6 +63,8 @@ class AllyShip extends SpaceObject
       
       if(keys[shoot] && elapsed > 12 && rocket == false)
       {
+        shoots.rewind();
+        shoots.play();
         for(int i=0; i < 2; i++)
         {
           Bullet bullet = new Bullet();
@@ -69,12 +77,15 @@ class AllyShip extends SpaceObject
       
       if(keys[shoot] && elapsed > 20 && rocket == true && rocketShells > 0)
       {
+        bottlerocket.rewind();
+        bottlerocket.play();
         Rocket rocket = new Rocket();
         rocket.pos.x = pos.x;
         rocket.pos.y = pos.y;
         spaceObjects.add(rocket);
         elapsed = 0 ;
         rocketShells --;
+        
       }
       
       //switches to rocket if N is pressed
@@ -107,6 +118,7 @@ class AllyShip extends SpaceObject
       elapsed ++;
       
       fill(255);
+      textSize(10);
       text("Health: " + health,20 , 20);
       text("Score: " + score,20 , 40);
       text("Rockets: " + rocketShells,20 , 60);
@@ -122,6 +134,8 @@ class AllyShip extends SpaceObject
         if(frameCount % 60 == 0)
         {
           spaceObjects.remove(this);
+          explosion.rewind();
+          explosion.play();
         }
       }
       

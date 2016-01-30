@@ -33,7 +33,7 @@ abstract class SpaceObject
    
    void explode(float posX, float posY)
    {
-      float lastX = posX; float lastY =posY;
+      float lastX = posX; float lastY = posY;
       float thetaInc = TWO_PI / 4;
       
       //creates outter red explosion

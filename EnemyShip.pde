@@ -1,5 +1,7 @@
 class EnemyShip extends SpaceObject
 {
+   AudioPlayer invaderkilled;
+  
    EnemyShip()
   {
      super(width,random(0+10,height-10), 50);
@@ -10,6 +12,7 @@ class EnemyShip extends SpaceObject
   {
      super(startX, startY, 50); 
      health = 100;
+     invaderkilled = minim.loadFile("blast.mp3");
   }
   
   void update()
@@ -33,6 +36,8 @@ class EnemyShip extends SpaceObject
       if(frameCount % 60 == 0)
       {
         spaceObjects.remove(this);
+        invaderkilled.rewind();
+        invaderkilled.play();
         
          //adds points onto the allyships score board
         for(int i =0; i < spaceObjects.size();i++)
@@ -71,6 +76,7 @@ class EnemyShip extends SpaceObject
         fill(0);
       }
       noStroke();
+      textSize(10);
       text(+ health, 5 ,10);
       //green
       arc(5, -10, 60, 40,  HALF_PI,PI+HALF_PI);
