@@ -76,7 +76,7 @@ void draw()
          
          if(level == 1 && frameCount % 40 == 0 && timer <= 60)
          {
-                 println(level);
+           
                  SpaceObject enemy = null;
                  
                  int i = (int) random(0,2);

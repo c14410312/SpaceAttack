@@ -55,10 +55,10 @@ class General extends SpaceObject
     if(health <= 0)
     {
       textSize(50);
-      fill(0,200,0);
-      text("General Defeated", width/4, height/2);
+      fill(255);
+      text("Level" + level " Completed!", width/4, height/2);
       
-      if(frameCount % 60 == 0)
+      if(frameCount % 180 == 0)
       {
         invaderkilled.rewind();
         invaderkilled.play();
@@ -71,9 +71,8 @@ class General extends SpaceObject
             if (so instanceof AllyShip)
             {
               so.score += 150;
-              level = 1;
+              level += 1;
               timer = 0;
-              println("General Dead");
             }
           }
       }
