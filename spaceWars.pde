@@ -281,12 +281,14 @@ void CheckPowerupCollisions()
 //function to load up the menu screen
 void menu()
 {
-   textSize(18);
-   text("Welcome to Space Wars",300,300);
+   fill(122);
+   rect(width/4, width/4, 350,500);
+
    
-   textSize(16);
-   text("Press 1: Start Game",300,370);
-   text("Press 2: High Scores",300,390);
-   text("Press 3: Instructions",300,410);
-   text("Press 4: Exit",300,430);
+   textSize(20);
+   fill(255);
+   text("Press 1: Start Game",250,370);
+   text("Press 2: High Scores",250,390);
+   text("Press 3: Instructions",250,410);
+   text("Press 4: Exit",250,430);
 }
