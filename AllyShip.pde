@@ -119,23 +119,25 @@ class AllyShip extends SpaceObject
       
       fill(255);
       textSize(10);
-      text("Health: " + health,20 , 20);
-      text("Score: " + score,20 , 40);
-      text("Rockets: " + rocketShells,20 , 60);
+      text("Health: " + health,40 , 20);
+      text("Score: " + score,40 , 40);
+      text("Rockets: " + rocketShells,40 , 60);
       
       //displays shield health if active
       if(shield == true)
       {
-        text("Shield: " + shieldHealth,20 , 80);
+        text("Shield: " + shieldHealth,40 , 80);
       }
       
       if(health <= 0)
       {
-        if(frameCount % 60 == 0)
+        fill(255);
+        text("Game Over", width/2, height/2);
+        if(frameCount % 180 == 0)
         {
-          spaceObjects.remove(this);
           explosion.rewind();
           explosion.play();
+          spaceObjects.remove(this);
         }
       }
       

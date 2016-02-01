@@ -2,6 +2,7 @@ class Asteroid extends SpaceObject implements AffectAlly
 {
    float thetaDir;
    float place;
+
   
    Asteroid()
    {
@@ -45,6 +46,7 @@ class Asteroid extends SpaceObject implements AffectAlly
   
   void applyTo(AllyShip AShip)
   {
+   
     if(AShip.shield == true)
     {
        AShip.shieldHealth -= 25; 
@@ -53,6 +55,6 @@ class Asteroid extends SpaceObject implements AffectAlly
     {
       AShip.health -= 25;
     }
-    spaceObjects.remove(this);
+      spaceObjects.remove(this);
   }
 }

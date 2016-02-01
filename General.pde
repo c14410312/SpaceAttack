@@ -56,7 +56,7 @@ class General extends SpaceObject
     {
       textSize(50);
       fill(255);
-      text("Level" + level+ " Completed!", width/4, height/2);
+      text("Level" + level+ " Completed!", width/2, height/2);
       
       if(frameCount % 180 == 0)
       {

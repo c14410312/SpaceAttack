@@ -15,6 +15,9 @@ void setup()
     track = minim.loadFile("soundtrack.mp3");
     track.rewind();
     track.play(); 
+    
+    img1 = loadImage("gameBackground.jpg");
+    img1.resize(width,height);
 }
 
 
@@ -24,6 +27,7 @@ boolean[] keys = new boolean[512];
 int timer = 0;
 int screen = 0;
 PImage img;
+PImage img1;
 int level = 1;
 
 
@@ -39,7 +43,8 @@ void keyReleased()
 
 void draw()
 {
-   background(0);
+  background(img1);
+  
    if(timer < 3)
    {
      textSize(50);
@@ -58,6 +63,7 @@ void draw()
  if(keys['1'])
   { 
     screen = 1;
+    
   }
   
  
@@ -70,7 +76,7 @@ void draw()
  }
  
  if (screen == 1)
- {
+{
 
          //increments timer every second
          if(frameCount % 60 == 0)
@@ -124,7 +130,7 @@ void draw()
             //waits an extra second in order for timer to be greater than 60 or else multiple ships created
             textSize(50);
             fill(0,200,0);
-            text("General Deployed", width/4, height/2);
+            text("General Deployed", width/2, height/2);
             if(frameCount % 60 == 0)
             {
               AudioPlayer general;
@@ -193,7 +199,7 @@ void checkAsteroidHits()
           {
             // Do some casting
             ((AffectAlly) other).applyTo((AllyShip)so);
-            spaceObjects.remove(other);
+              spaceObjects.remove(other);
           }
         }
       }
@@ -201,6 +207,7 @@ void checkAsteroidHits()
  } 
 }
 
+//needs to be fixed causing a bug!!!!!!
 //Deducts health from enemy ships on collision with ally bullets
 void checkAllyBulletHits()
 {
