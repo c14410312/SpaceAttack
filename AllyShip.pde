@@ -133,7 +133,7 @@ class AllyShip extends SpaceObject
       {
         fill(255);
         text("Game Over", width/2, height/2);
-        if(frameCount % 180 == 0)
+        if(frameCount % 60 == 0)
         {
           explosion.rewind();
           explosion.play();

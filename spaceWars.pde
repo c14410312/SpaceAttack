@@ -86,7 +86,25 @@ void draw()
          
          //creates asteroids and enemy ships every 3/4 second
          
-         if(level == 1 && frameCount % 40 == 0 && timer <= 120)
+         if(level == 1 && frameCount % 40 == 0 && timer <= 60)
+         {
+           
+                 SpaceObject enemy = null;
+                 
+                 int i = (int) random(0,2);
+                 switch(i)
+                 {
+                   case 0:
+                     enemy = new EnemyShip(width, random(0,height));
+                     break;
+                   case 1:
+                     enemy = new Asteroid();
+                     break;
+                 }
+                 spaceObjects.add(enemy);
+         }
+         
+         if(level == 2 && frameCount % 40 == 0 && timer <= 60)
          {
            
                  SpaceObject enemy = null;
@@ -125,7 +143,7 @@ void draw()
             spaceObjects.add(powerup);
           }
           
-          if(timer == 120)
+          if(timer == 60)
           {
             //waits an extra second in order for timer to be greater than 60 or else multiple ships created
             textSize(50);
@@ -143,7 +161,9 @@ void draw()
               
               
             }
-          }//
+          }
+          
+          
 
          
          //collision function calls
@@ -174,6 +194,11 @@ void checkEnemyBulletHits()
             // Do some casting
             ((AffectAlly) other).applyTo((AllyShip)so);
             spaceObjects.remove(other);
+            
+            AudioPlayer impact;
+              impact = minim.loadFile("impact.wav");
+              impact.rewind();
+              impact.play();
           }
         }
       }
