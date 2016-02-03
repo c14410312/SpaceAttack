@@ -8,6 +8,7 @@ abstract class SpaceObject
    float speed = 4.0f;
    float border = width * 0.05;
    int elapsed = 6;
+   int elapsed2;
    int health;
    int dead;
    int score;

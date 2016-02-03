@@ -12,6 +12,7 @@ class AllyShip extends SpaceObject
   boolean rocket = false;
   int shieldHealth;
   int rocketShells;
+  int laser;
   AudioPlayer shoots;
   AudioPlayer bottlerocket;
   AudioPlayer explosion;
@@ -35,6 +36,7 @@ class AllyShip extends SpaceObject
      health = 100;
      score = 0;
      rocketShells = 0;
+     laser = 100;
      shoots = minim.loadFile("shoot.wav");
      explosion = minim.loadFile("explosion.wav");
      bottlerocket = minim.loadFile("bottlerocket.wav");
@@ -88,6 +90,7 @@ class AllyShip extends SpaceObject
         
       }
       
+      
       //switches to rocket if N is pressed
       if(keys[weapChange])
       {
@@ -131,8 +134,8 @@ class AllyShip extends SpaceObject
       
       if(health <= 0)
       {
-        fill(255);
-        text("Game Over", width/2, height/2);
+        finalScore = score;
+        gameOver = true;
         if(frameCount % 60 == 0)
         {
           explosion.rewind();

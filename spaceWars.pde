@@ -29,6 +29,8 @@ int screen = 0;
 PImage img;
 PImage img1;
 int level = 1;
+boolean gameOver = false;
+int finalScore;
 
 
 void keyPressed()
@@ -59,12 +61,14 @@ void draw()
    so.update();
    so.render();
  } 
-
- if(keys['1'])
+if(keyPressed)
+{
+ if(key == '1')
   { 
     screen = 1;
     
   }
+}
   
  
  if(screen == 0)
@@ -86,7 +90,7 @@ void draw()
          
          //creates asteroids and enemy ships every 3/4 second
          
-         if(level == 1 && frameCount % 40 == 0 && timer <= 60)
+         if(level == 1 && frameCount % 40 == 0 && timer <= 60 && gameOver == false)
          {
            
                  SpaceObject enemy = null;
@@ -104,7 +108,26 @@ void draw()
                  spaceObjects.add(enemy);
          }
          
-         if(level == 2 && frameCount % 40 == 0 && timer <= 60)
+         if(level == 2 && frameCount % 40 == 0 && timer <= 60  && gameOver == false)
+         {
+           
+                 SpaceObject enemy = null;
+                 
+                 int i = (int) random(0,2);
+                 switch(i)
+                 {
+                   case 0:
+                     enemy = new EnemyShip(width, random(0,height));
+                     break;
+                   case 1:
+                     enemy = new Asteroid();
+                     break;
+                 }
+                 spaceObjects.add(enemy);
+         }
+         
+         //level 3
+         if(level == 3 && frameCount % 40 == 0 && timer <= 60  && gameOver == false)
          {
            
                  SpaceObject enemy = null;
@@ -123,7 +146,7 @@ void draw()
          }
          
          // Create a powerup every 20 seconds
-          if (frameCount % 600 == 0)
+          if (frameCount % 600 == 0  && gameOver == false)
           {
             SpaceObject powerup = null;
             
@@ -143,7 +166,7 @@ void draw()
             spaceObjects.add(powerup);
           }
           
-          if(timer == 60)
+          if(timer == 60  && gameOver == false)
           {
             //waits an extra second in order for timer to be greater than 60 or else multiple ships created
             textSize(50);
@@ -163,7 +186,31 @@ void draw()
             }
           }
           
-          
+          //GameOver
+          if(gameOver == true)
+          {
+              fill(255);
+              textSize(50);
+              text("Game Over", width/2, height/4);
+              text("Play Again: Press Y/N?", width/2, height/2);
+              text("Score: "+ finalScore, width/2, height/1.5);
+              
+             
+              //restarts a new Game, resets timer to zero and also returns to level 1 
+              if(keys['Y'])
+              {
+                AllyShip AShip = new AllyShip('W', 'A', 'D','S', ' ','N', width * 0.25, height* 0.5);
+                spaceObjects.add(AShip);
+                timer = 0;
+                level = 1;
+                gameOver = false;
+              }
+              if(keys['N'])
+              {
+                 screen = 0; 
+              }
+              
+          }
 
          
          //collision function calls
@@ -171,6 +218,8 @@ void draw()
          checkAsteroidHits();
          checkAllyBulletHits();
          CheckPowerupCollisions();
+         CheckBulletAsteroidCollisions();
+         checkAllyBulletHitsGeneral();
  }//end screen 1
  
 }
@@ -186,7 +235,7 @@ void checkEnemyBulletHits()
       for(int j = spaceObjects.size() - 1 ; j >= 0   ;j --)
       {
         SpaceObject other = spaceObjects.get(j);
-        if (other instanceof EnemyBullet) // Check the type of a object
+        if (other instanceof EnemyBullet || other instanceof GeneralRocket) // Check the type of a object
         {
           // Bounding circle collisions
           if (so.pos.dist(other.pos) < so.halfW/2 + other.halfW/2)
@@ -239,7 +288,7 @@ void checkAllyBulletHits()
  for(int i = spaceObjects.size() - 1 ; i >= 0   ;i --)
  {
     SpaceObject so = spaceObjects.get(i);
-    if (so instanceof EnemyShip || so instanceof General)
+    if (so instanceof EnemyShip)
     {
       for(int j = spaceObjects.size() - 1 ; j >= 0   ;j --)
       {
@@ -254,8 +303,30 @@ void checkAllyBulletHits()
             {
               ((AffectEnemy) other).applyTo((EnemyShip)so);
             }
-            
-            
+            spaceObjects.remove(other);
+          }
+        }
+      }
+    }
+ } 
+}
+
+void checkAllyBulletHitsGeneral()
+{
+ for(int i = spaceObjects.size() - 1 ; i >= 0   ;i --)
+ {
+    SpaceObject so = spaceObjects.get(i);
+    if (so instanceof General)
+    {
+      for(int j = spaceObjects.size() - 1 ; j >= 0   ;j --)
+      {
+        SpaceObject other = spaceObjects.get(j);
+        if (other instanceof Bullet || other instanceof Rocket) // Check the type of a object
+        {
+          // Bounding circle collisions
+          if (so.pos.dist(other.pos) < so.halfW + other.halfW)
+          {
+            // Do some casting
             if(so instanceof General)
             {
               ((AffectEnemy) other).applyTo((General)so);
@@ -265,6 +336,15 @@ void checkAllyBulletHits()
         }
       }
     }
+ } 
+}
+
+
+void CheckBulletAsteroidCollisions()
+{
+ for(int i = spaceObjects.size() - 1 ; i >= 0   ;i --)
+ {
+    SpaceObject so = spaceObjects.get(i);
     if(so instanceof Bullet || so instanceof EnemyBullet)
     {
       for(int j = spaceObjects.size() - 1 ; j >= 0   ;j --)

@@ -12,6 +12,7 @@ class General extends SpaceObject
      super(startX, startY, 50); 
      health = 2000;
      int elapsed;
+     int elapsed2;
      invaderkilled = minim.loadFile("blast.mp3");
   }
   
@@ -49,6 +50,19 @@ class General extends SpaceObject
        }
        elapsed = 0;
     }
+    
+    if(elapsed2 > 250 && level == 2)
+    {
+      for(int i = 0; i < 6; i ++)
+      {
+        
+          GeneralRocket GRocket = new GeneralRocket();
+          GRocket.pos.x = pos.x;
+          GRocket.pos.y = (pos.y-60)  + (i * 25);
+          spaceObjects.add(GRocket);
+       }
+       elapsed2 = 0;
+    }
 
     
     //removes general and adds points when general killed
@@ -70,7 +84,7 @@ class General extends SpaceObject
             SpaceObject so = spaceObjects.get(i);
             if (so instanceof AllyShip)
             {
-              so.score += 150;
+              so.score += 250;
               level += 1;
               timer = 0;
             }
@@ -79,6 +93,7 @@ class General extends SpaceObject
     }
     
     elapsed ++;
+    elapsed2++;
   }
   
   void render()
