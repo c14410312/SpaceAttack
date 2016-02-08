@@ -7,6 +7,7 @@ void setup()
    minim = new Minim(this);
    size(800,500);
    smooth(); 
+   
    AllyShip AShip = new AllyShip('W', 'A', 'D','S', ' ','N', width * 0.25, height* 0.5);
    spaceObjects.add(AShip);
    
@@ -69,14 +70,14 @@ if(keyPressed)
  if(key == '1')
   { 
     screen = 1;
+    gameOver = false;
     
   }
 }
   
  
  if(screen == 0)
- {
-        
+ {  
    img = loadImage("menu_background_1.jpg");
    img.resize(width,height);
    image(img, 0, 0);
@@ -84,7 +85,7 @@ if(keyPressed)
  
  if (screen == 1)
 {
-
+    
          //increments timer every second
          if(frameCount % 60 == 0)
          {
@@ -208,12 +209,16 @@ if(keyPressed)
               {
                 AllyShip AShip = new AllyShip('W', 'A', 'D','S', ' ','N', width * 0.25, height* 0.5);
                 spaceObjects.add(AShip);
+                
                 timer = 0;
                 level = 1;
                 gameOver = false;
               }
               if(keys['N'])
               {
+                 AllyShip AShip = new AllyShip('W', 'A', 'D','S', ' ','N', width * 0.25, height* 0.5);
+                 spaceObjects.add(AShip);
+                 
                  screen = 0; 
               }
               

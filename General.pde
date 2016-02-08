@@ -94,7 +94,13 @@ class General extends SpaceObject
     
     elapsed ++;
     elapsed2++;
+    
+    if (gameOver == true)
+    {
+      spaceObjects.remove(this);
+    }
   }
+  
   
   void render()
   {
