@@ -18,10 +18,13 @@ void setup()
     
     img1 = loadImage("gameBackground.jpg");
     img1.resize(width,height);
+    
+    loadHighScores();
 }
 
 
 ArrayList<SpaceObject> spaceObjects = new ArrayList<SpaceObject>();
+ArrayList<HighScores> scores = new ArrayList<HighScores>();
 
 boolean[] keys = new boolean[512];
 int timer = 0;
@@ -195,6 +198,10 @@ if(keyPressed)
               text("Play Again: Press Y/N?", width/2, height/2);
               text("Score: "+ finalScore, width/2, height/1.5);
               
+              //saves score to file
+              String s = str(finalScore);
+              String[] scores = split(s, ' ');
+              saveStrings("highScores.txt", scores);
              
               //restarts a new Game, resets timer to zero and also returns to level 1 
               if(keys['Y'])
@@ -394,5 +401,18 @@ void CheckPowerupCollisions()
       }
     }
  } 
+}
+
+//load high scores
+void loadHighScores()
+{
+    String[] lines = loadStrings("highScores.txt");
+    for (int i = 0 ; i < lines.length ; i ++)
+    {
+       HighScores score = new HighScores(lines[i]);
+      scores.add(score);
+      println(score.player + " " + score.score);
+    }
+        
 }
 
