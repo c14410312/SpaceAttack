@@ -202,9 +202,7 @@ if(keyPressed)
               text("Score: "+ finalScore, width/2, height/1.5);
               
               //saves score to file
-              String s = str(finalScore);
-              String[] scores = split(s, ' ');
-              saveStrings("highScores.txt", scores);
+              
              
               //restarts a new Game, resets timer to zero and also returns to level 1 
               if(keys['Y'])
@@ -448,13 +446,15 @@ void CheckPowerupCollisions()
 //load high scores
 void loadHighScores()
 {
-    String[] lines = loadStrings("highScores.txt");
-    for (int i = 0 ; i < lines.length ; i ++)
-    {
-       HighScores score = new HighScores(lines[i]);
-      scores.add(score);
-      println(score.player + " " + score.score);
-    }
-        
+       Table table = loadTable("highScores.csv", "header");
+       
+       for (TableRow row : table.rows()) {
+         String n = row.getString("player");
+         float y = row.getFloat("score");
+         
+         println(n + y);
+       }
 }
+        
+
 
