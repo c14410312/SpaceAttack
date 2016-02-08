@@ -5,17 +5,19 @@ Minim minim;
 void setup()
 {
    minim = new Minim(this);
+   
+   AudioPlayer track;
+   track = minim.loadFile("soundtrack.mp3");
+   track.rewind();
+   track.play(); 
+    
    size(800,500);
    smooth(); 
    
    AllyShip AShip = new AllyShip('W', 'A', 'D','S', ' ','N', width * 0.25, height* 0.5);
    spaceObjects.add(AShip);
    
-   //in Game track
-    AudioPlayer track;
-    track = minim.loadFile("soundtrack.mp3");
-    track.rewind();
-    track.play(); 
+   
     
     img1 = loadImage("gameBackground.jpg");
     img1.resize(width,height);
@@ -70,7 +72,7 @@ if(keyPressed)
  if(key == '1')
   { 
     screen = 1;
-    gameOver = false;
+    gameOver = false; 
     
   }
 }
@@ -94,7 +96,7 @@ if(keyPressed)
          
          //creates asteroids and enemy ships every 3/4 second
          
-         if(level == 1 && frameCount % 40 == 0 && timer <= 60 && gameOver == false)
+         if(level == 1 && frameCount % 50 == 0 && timer <= 60 && gameOver == false)
          {
            
                  SpaceObject enemy = null;
@@ -112,7 +114,7 @@ if(keyPressed)
                  spaceObjects.add(enemy);
          }
          
-         if(level == 2 && frameCount % 40 == 0 && timer <= 60  && gameOver == false)
+         if(level == 2 && frameCount % 50 == 0 && timer <= 60  && gameOver == false)
          {
            
                  SpaceObject enemy = null;
@@ -131,7 +133,7 @@ if(keyPressed)
          }
          
          //level 3
-         if(level == 3 && frameCount % 40 == 0 && timer <= 60  && gameOver == false)
+         if(level == 3 && frameCount % 50 == 0 && timer <= 60  && gameOver == false)
          {
            
                  SpaceObject enemy = null;
@@ -188,6 +190,40 @@ if(keyPressed)
               
               
             }
+          }
+          
+          //Win
+          if(level == 4)
+          {
+              fill(255);
+              textSize(50);
+              text("You Win !!!!", width/2, height/4);
+              text("Play Again: Press Y/N?", width/2, height/2);
+              text("Score: "+ finalScore, width/2, height/1.5);
+              
+              //saves score to file
+              String s = str(finalScore);
+              String[] scores = split(s, ' ');
+              saveStrings("highScores.txt", scores);
+             
+              //restarts a new Game, resets timer to zero and also returns to level 1 
+              if(keys['Y'])
+              {
+                AllyShip AShip = new AllyShip('W', 'A', 'D','S', ' ','N', width * 0.25, height* 0.5);
+                spaceObjects.add(AShip);
+                
+                timer = 0;
+                level = 1;
+                gameOver = false;
+              }
+              if(keys['N'])
+              {
+                 AllyShip AShip = new AllyShip('W', 'A', 'D','S', ' ','N', width * 0.25, height* 0.5);
+                 spaceObjects.add(AShip);
+                 
+                 screen = 0; 
+              }
+              
           }
           
           //GameOver

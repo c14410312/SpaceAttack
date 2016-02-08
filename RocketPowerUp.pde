@@ -21,6 +21,11 @@ class RocketPowerUp extends SpaceObject implements AffectAlly
   void update()
   {
      pos.x -= speed/2; 
+     //removes powerup from array list when out of bounds
+    if (pos.x < 0 || pos.y < 0 || pos.x > width || pos.y > height)
+    {
+      spaceObjects.remove(this);
+    }
   }
   
   void applyTo(AllyShip AShip)

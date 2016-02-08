@@ -29,6 +29,14 @@ class EnemyShip extends SpaceObject
         spaceObjects.add(bullet);
         elapsed = 0 ;
       }
+    if(elapsed > 30 && health > 0 && level == 2)
+      {
+        EnemyBullet bullet = new EnemyBullet();
+        bullet.pos.x = pos.x;
+        bullet.pos.y = pos.y;
+        spaceObjects.add(bullet);
+        elapsed = 0 ;
+      }  
     //removes enemy ship if health below 1
     if(health <= 0)
     {
