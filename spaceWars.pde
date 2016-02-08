@@ -255,6 +255,7 @@ if(keyPressed)
                  AllyShip AShip = new AllyShip('W', 'A', 'D','S', ' ','N', width * 0.25, height* 0.5);
                  spaceObjects.add(AShip);
                  
+                 timer = 0;
                  screen = 0; 
               }
               
