@@ -53,7 +53,7 @@ void draw()
 {
   background(img1);
   
-   if(timer < 3)
+   if(timer < 3 && level < 4)
    {
      textSize(50);
      fill(255);

@@ -21,7 +21,7 @@ class EnemyShip extends SpaceObject
     pos.x -= speed*0.5;
     
     
-    if(elapsed > 40 && health > 0)
+    if(elapsed > 40 && health > 0 && level == 1)
       {
         EnemyBullet bullet = new EnemyBullet();
         bullet.pos.x = pos.x;
@@ -30,6 +30,15 @@ class EnemyShip extends SpaceObject
         elapsed = 0 ;
       }
     if(elapsed > 30 && health > 0 && level == 2)
+      {
+        EnemyBullet bullet = new EnemyBullet();
+        bullet.pos.x = pos.x;
+        bullet.pos.y = pos.y;
+        spaceObjects.add(bullet);
+        elapsed = 0 ;
+      }  
+      
+      if(elapsed > 25 && health > 0 && level == 3)
       {
         EnemyBullet bullet = new EnemyBullet();
         bullet.pos.x = pos.x;
