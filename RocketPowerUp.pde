@@ -14,6 +14,7 @@ class RocketPowerUp extends SpaceObject implements AffectAlly
     translate(pos.x, pos.y);
     fill(255);
     rect(- halfW, - halfW, halfW, halfW);
+    textSize(10);
     text("Rocekts",-30,halfW);
     popMatrix();
   }

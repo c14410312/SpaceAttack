@@ -207,18 +207,12 @@ if(keyPressed)
               //restarts a new Game, resets timer to zero and also returns to level 1 
               if(keys['Y'])
               {
-                AllyShip AShip = new AllyShip('W', 'A', 'D','S', ' ','N', width * 0.25, height* 0.5);
-                spaceObjects.add(AShip);
-                
                 timer = 0;
                 level = 1;
                 gameOver = false;
               }
               if(keys['N'])
               {
-                 AllyShip AShip = new AllyShip('W', 'A', 'D','S', ' ','N', width * 0.25, height* 0.5);
-                 spaceObjects.add(AShip);
-                 
                  screen = 0; 
               }
               
