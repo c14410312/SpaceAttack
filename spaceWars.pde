@@ -29,13 +29,10 @@ void setup()
     //third level image
     img3 = loadImage("gameBackground3.jpg");
     img3.resize(width,height);
-    
-    loadScores();
 }
 
 
 ArrayList<SpaceObject> spaceObjects = new ArrayList<SpaceObject>();
-ArrayList<HighScores> scores = new ArrayList<HighScores>();
 
 boolean[] keys = new boolean[512];
 int timer = 0;
@@ -447,17 +444,6 @@ void CheckPowerupCollisions()
       }
     }
  } 
-}
-
-void loadScores()
-{
-    String[] lines = loadStrings("highScores.csv");
-    for (int i = 0 ; i < lines.length ; i ++)
-    {
-      HighScores score = new HighScores(lines[i]);
-      scores.add(score);
-      println(scores.get(i).score);
-    }      
 }
 
         

@@ -106,7 +106,6 @@ class General extends SpaceObject
   {
       pushMatrix();
       translate(pos.x, pos.y);
-      text(+ health, -10 ,50);
       strokeWeight(1);
       noStroke();
       fill(255,0,0);
