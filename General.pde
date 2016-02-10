@@ -39,7 +39,7 @@ class General extends SpaceObject
       pos.y -= speed *0.5;
     }
     
-    if(elapsed > 40)
+    if(elapsed > 40 && level == 1)
     {
       for(int i = 0; i < 6; i ++)
       {
@@ -51,7 +51,19 @@ class General extends SpaceObject
        elapsed = 0;
     }
     
-    if(elapsed2 > 180 && level == 2 || elapsed2 > 180 && level == 3)
+    if(elapsed > 30 && level == 2)
+    {
+      for(int i = 0; i < 6; i ++)
+      {
+          EnemyBullet ebullet = new EnemyBullet();
+          ebullet.pos.x = pos.x;
+          ebullet.pos.y = (pos.y-60)  + (i * 25);
+          spaceObjects.add(ebullet);
+       }
+       elapsed = 0;
+    }
+    
+    if(elapsed2 > 180 && level == 3)
     {
       for(int i = 0; i < 6; i ++)
       {
