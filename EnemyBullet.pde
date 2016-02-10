@@ -5,7 +5,18 @@ class EnemyBullet extends SpaceObject implements AffectAlly
   {
      pushMatrix();
      translate(pos.x, pos.y);
-     fill(0,0,250);
+     if(level ==1)
+     {
+       fill(0,0,250);
+     }
+     if(level == 2)
+     {
+        fill(255,102,102); 
+     }
+     if(level == 3)
+     {
+        fill(255,255,0); 
+     }
      strokeWeight(1);
      stroke(200,0,0);
      ellipse(0, -halfW/2, 20 , 2 );

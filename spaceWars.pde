@@ -75,6 +75,10 @@ void draw()
   {
     background(img3);
   }
+  if(level == 4)
+  {
+    background(img3);
+  }
 
   
    if(timer < 3 && level < 4)

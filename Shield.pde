@@ -13,6 +13,7 @@ class Shield extends SpaceObject implements AffectAlly
     translate(pos.x, pos.y);
     fill(153,255,204);
     strokeWeight(1);
+    textSize(10);
     rect(- halfW, - halfW, halfW, halfW);
     text("Shield", -30, halfW);
     popMatrix();
