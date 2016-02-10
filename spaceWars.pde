@@ -10,13 +10,15 @@ void setup()
    track = minim.loadFile("soundtrack.mp3");
    track.rewind();
    track.play(); 
-    
-   size(800,500);
-   smooth(); 
    
    AllyShip AShip = new AllyShip('W', 'A', 'D','S', ' ','M', width * 0.25, height* 0.5);
    spaceObjects.add(AShip);
-   
+    
+   size(800,500);
+   smooth(); 
+    
+    instruct = loadImage("instructionBackground.jpg");
+    instruct.resize(width,height);
    
     //first level image
     img1 = loadImage("gameBackground.jpg");
@@ -41,6 +43,7 @@ PImage img;
 PImage img1;
 PImage img2;
 PImage img3;
+PImage instruct;
 int level = 1;
 boolean gameOver = false;
 int finalScore;
@@ -76,6 +79,7 @@ void draw()
   {
     background(img3);
   }
+  
 
   
    if(timer < 3 && level < 4)
@@ -102,7 +106,7 @@ if(keyPressed)
   }
   if(key == '2')
   {
-    
+    screen = 2;
   }
   if(key == '3')
   {
@@ -295,7 +299,32 @@ if(keyPressed)
          CheckBulletAsteroidCollisions();
          checkAllyBulletHitsGeneral();
  }//end screen 1
- 
+  
+  //displays instructions to user
+  if(screen == 2)
+  {
+    background(instruct);
+    textSize(50);
+    fill(255);
+    textAlign(CENTER,CENTER);
+    text("Instructions", width/2, height/6);
+    textSize(30);
+    text("Ship Commands", width/2, height/6 + 60);
+    textSize(15);
+    text("press W: upwards", width/2, height/6 + 80);
+    text("press S: downwards", width/2, height/6 + 100);
+    text("press A: left", width/2, height/6 + 120);
+    text("press D: right", width/2, height/6 + 140);
+    text("press Space: fire", width/2, height/6 + 160);
+    text("press M: change weapon", width/2, height/6 + 180);
+    textSize(30);
+    text("Ship Damage", width/2, height/6 + 200);
+    textSize(15);
+    text("Enemy bullet: -5", width/2, height/6 + 230);
+    text("General Rocket: -25", width/2, height/6 + 250);
+    text("Asteroid collision: -25", width/2, height/6 + 270);
+    
+  } 
 }
 
 //Deducts health from ally ship on collision with enemy bullets

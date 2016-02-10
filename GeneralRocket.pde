@@ -4,7 +4,7 @@ class GeneralRocket extends SpaceObject implements AffectAlly
   
   void applyTo(AllyShip AShip)
   {
-    AShip.health -= 50;
+    AShip.health -= 25;
   }
   
   void render()
