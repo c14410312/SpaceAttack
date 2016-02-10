@@ -14,7 +14,7 @@ void setup()
    size(800,500);
    smooth(); 
    
-   AllyShip AShip = new AllyShip('W', 'A', 'D','S', ' ','N', width * 0.25, height* 0.5);
+   AllyShip AShip = new AllyShip('W', 'A', 'D','S', ' ','M', width * 0.25, height* 0.5);
    spaceObjects.add(AShip);
    
    
@@ -254,7 +254,7 @@ if(keyPressed)
               //restarts a new Game, resets timer to zero and also returns to level 1 
               if(keys['Y'])
               {
-                AllyShip AShip = new AllyShip('W', 'A', 'D','S', ' ','N', width * 0.25, height* 0.5);
+                AllyShip AShip = new AllyShip('W', 'A', 'D','S', ' ','M', width * 0.25, height* 0.5);
                 spaceObjects.add(AShip);
                 
                 timer = 0;
@@ -263,7 +263,7 @@ if(keyPressed)
               }
               if(keys['N'])
               {
-                 AllyShip AShip = new AllyShip('W', 'A', 'D','S', ' ','N', width * 0.25, height* 0.5);
+                 AllyShip AShip = new AllyShip('W', 'A', 'D','S', ' ','M', width * 0.25, height* 0.5);
                  spaceObjects.add(AShip);
                  
                  timer = 0;
