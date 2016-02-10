@@ -94,6 +94,10 @@ class AllyShip extends SpaceObject
       //switches to rocket if N is pressed
       if(keys[weapChange])
       {
+        AudioPlayer track;
+        track = minim.loadFile("Switch.wav");
+        track.rewind();
+        track.play(); 
         rocket = !rocket;
       }
       

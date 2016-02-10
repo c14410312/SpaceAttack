@@ -22,12 +22,13 @@ void setup()
     img1 = loadImage("gameBackground.jpg");
     img1.resize(width,height);
     
-    loadHighScores();
+    loadScores();
 }
 
 
 ArrayList<SpaceObject> spaceObjects = new ArrayList<SpaceObject>();
 ArrayList<HighScores> scores = new ArrayList<HighScores>();
+
 
 boolean[] keys = new boolean[512];
 int timer = 0;
@@ -199,10 +200,7 @@ if(keyPressed)
               textSize(50);
               text("You Win !!!!", width/2, height/4);
               text("Play Again: Press Y/N?", width/2, height/2);
-              text("Score: "+ finalScore, width/2, height/1.5);
-              
-              //saves score to file
-              
+              text("Score: "+ finalScore, width/2, height/1.5);              
              
               //restarts a new Game, resets timer to zero and also returns to level 1 
               if(keys['Y'])
@@ -227,10 +225,6 @@ if(keyPressed)
               text("Play Again: Press Y/N?", width/2, height/2);
               text("Score: "+ finalScore, width/2, height/1.5);
               
-              //saves score to file
-              String s = str(finalScore);
-              String[] scores = split(s, ' ');
-              saveStrings("highScores.txt", scores);
              
               //restarts a new Game, resets timer to zero and also returns to level 1 
               if(keys['Y'])
@@ -437,17 +431,16 @@ void CheckPowerupCollisions()
  } 
 }
 
-//load high scores
-void loadHighScores()
+void loadScores()
 {
-       Table table = loadTable("highScores.csv", "header");
-       
-       for (TableRow row : table.rows()) {
-         String n = row.getString("player");
-         float y = row.getFloat("score");
-         
-         println(n + y);
-       }
+     String[] lines = loadStrings("highScores.csv");
+    for (int i = 0 ; i < lines.length ; i ++)
+    {
+      HighScores score = new HighScores(lines[i]);
+      scores.add(score);
+      println(scores.get(i).score);
+    }
+        
 }
         
 
