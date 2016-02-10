@@ -106,7 +106,7 @@ if(keyPressed)
                  switch(i)
                  {
                    case 0:
-                     enemy = new EnemyShip(width, random(0,height));
+                     enemy = new EnemyShip(width, random(30,height-30));
                      break;
                    case 1:
                      enemy = new Asteroid();
@@ -124,7 +124,7 @@ if(keyPressed)
                  switch(i)
                  {
                    case 0:
-                     enemy = new EnemyShip(width, random(0,height));
+                     enemy = new EnemyShip(width, random(30,height-30));
                      break;
                    case 1:
                      enemy = new Asteroid();
@@ -143,7 +143,7 @@ if(keyPressed)
                  switch(i)
                  {
                    case 0:
-                     enemy = new EnemyShip(width, random(0,height));
+                     enemy = new EnemyShip(width, random(30,height-30));
                      break;
                    case 1:
                      enemy = new Asteroid();
