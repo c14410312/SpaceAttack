@@ -18,9 +18,17 @@ void setup()
    spaceObjects.add(AShip);
    
    
-    
+    //first level image
     img1 = loadImage("gameBackground.jpg");
     img1.resize(width,height);
+    
+    //second level image
+    img2 = loadImage("gameBackground2.jpg");
+    img2.resize(width,height);
+    
+    //third level image
+    img3 = loadImage("gameBackground3.jpg");
+    img3.resize(width,height);
     
     loadScores();
 }
@@ -34,6 +42,8 @@ int timer = 0;
 int screen = 0;
 PImage img;
 PImage img1;
+PImage img2;
+PImage img3;
 int level = 1;
 boolean gameOver = false;
 int finalScore;
@@ -51,7 +61,21 @@ void keyReleased()
 
 void draw()
 {
-  background(img1);
+  if(level == 1)
+  {
+    background(img1);
+  }
+  
+  if(level == 2)
+  {
+    background(img2);
+  }
+  
+  if(level == 3)
+  {
+    background(img3);
+  }
+
   
    if(timer < 3 && level < 4)
    {
@@ -72,6 +96,7 @@ if(keyPressed)
  if(key == '1')
   { 
     screen = 1;
+    level = 1;
     gameOver = false; 
     
   }
@@ -87,7 +112,7 @@ if(keyPressed)
  
  if (screen == 1)
 {
-    
+          
          //increments timer every second
          if(frameCount % 60 == 0)
          {
@@ -210,7 +235,8 @@ if(keyPressed)
               }
               if(keys['N'])
               {
-                 screen = 0; 
+                 screen = 0;
+                 timer = 0; 
               }
               
           }
@@ -241,6 +267,7 @@ if(keyPressed)
                  spaceObjects.add(AShip);
                  
                  timer = 0;
+                 level = 1;
                  screen = 0; 
               }
               
