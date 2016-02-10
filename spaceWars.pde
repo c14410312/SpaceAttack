@@ -99,7 +99,19 @@ if(keyPressed)
     screen = 1;
     level = 1;
     gameOver = false; 
+  }
+  if(key == '2')
+  {
     
+  }
+  if(key == '3')
+  {
+    
+  }
+  //end program
+  if(key == '4')
+  {
+    exit();
   }
 }
   
