@@ -51,7 +51,7 @@ class General extends SpaceObject
        elapsed = 0;
     }
     
-    if(elapsed2 > 250 && level == 2)
+    if(elapsed2 > 180 && level == 2 || elapsed2 > 180 && level == 3)
     {
       for(int i = 0; i < 6; i ++)
       {
@@ -106,7 +106,7 @@ class General extends SpaceObject
   {
       pushMatrix();
       translate(pos.x, pos.y);
-      text(+ health, 5 ,10);
+      text(+ health, -10 ,50);
       strokeWeight(1);
       noStroke();
       fill(255,0,0);

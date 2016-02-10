@@ -29,7 +29,6 @@ void setup()
 ArrayList<SpaceObject> spaceObjects = new ArrayList<SpaceObject>();
 ArrayList<HighScores> scores = new ArrayList<HighScores>();
 
-
 boolean[] keys = new boolean[512];
 int timer = 0;
 int screen = 0;
@@ -322,8 +321,8 @@ void checkAllyBulletHits()
 {
  for(int i = spaceObjects.size() - 1 ; i >= 0   ;i --)
  {
-    SpaceObject so = spaceObjects.get(i);
-    if (so instanceof EnemyShip)
+    SpaceObject ao = spaceObjects.get(i);
+    if (ao instanceof EnemyShip)
     {
       for(int j = spaceObjects.size() - 1 ; j >= 0   ;j --)
       {
@@ -331,13 +330,9 @@ void checkAllyBulletHits()
         if (other instanceof Bullet || other instanceof Rocket) // Check the type of a object
         {
           // Bounding circle collisions
-          if (so.pos.dist(other.pos) < so.halfW + other.halfW)
+          if (ao.pos.dist(other.pos) < ao.halfW + other.halfW)
           {
-            // Do some casting
-            if(so instanceof EnemyShip)
-            {
-              ((AffectEnemy) other).applyTo((EnemyShip)so);
-            }
+            ((AffectEnemy) other).applyTo((EnemyShip)ao);
             spaceObjects.remove(other);
           }
         }
@@ -361,11 +356,7 @@ void checkAllyBulletHitsGeneral()
           // Bounding circle collisions
           if (so.pos.dist(other.pos) < so.halfW + other.halfW)
           {
-            // Do some casting
-            if(so instanceof General)
-            {
-              ((AffectEnemy) other).applyTo((General)so);
-            }
+            ((AffectEnemy) other).applyTo((General)so);
             spaceObjects.remove(other);
           }
         }
@@ -390,11 +381,7 @@ void CheckBulletAsteroidCollisions()
           // Bounding circle collisions
           if (so.pos.dist(other.pos) <= so.halfW/2 + other.halfW/2)
           {
-            //removes bullets if they hit asteroid
-            if(so instanceof Bullet || so instanceof EnemyBullet)
-            {
               spaceObjects.remove(so);
-            }
           }
         }
       }
@@ -433,15 +420,15 @@ void CheckPowerupCollisions()
 
 void loadScores()
 {
-     String[] lines = loadStrings("highScores.csv");
+    String[] lines = loadStrings("highScores.csv");
     for (int i = 0 ; i < lines.length ; i ++)
     {
       HighScores score = new HighScores(lines[i]);
       scores.add(score);
       println(scores.get(i).score);
-    }
-        
+    }      
 }
+
         
 
 
