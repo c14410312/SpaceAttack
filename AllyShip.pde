@@ -8,7 +8,7 @@ class AllyShip extends SpaceObject
   char shoot;
   char weapChange;
   
-  boolean shield = false;
+  boolean shield;
   boolean rocket = false;
   int shieldHealth;
   int rocketShells;
@@ -22,6 +22,7 @@ class AllyShip extends SpaceObject
   {
      super(width * 0.25f, height * 0.5f, 50);
      println("Default Ship Constructer");
+     rocket = false;
   }
   
   AllyShip(char up, char left, char right, char down, char shoot, char weapChange, float startX, float startY)
@@ -36,7 +37,7 @@ class AllyShip extends SpaceObject
      health = 100;
      score = 0;
      rocketShells = 0;
-     laser = 100;
+     rocket = false;
      shoots = minim.loadFile("shoot.wav");
      explosion = minim.loadFile("explosion.wav");
      bottlerocket = minim.loadFile("bottlerocket.wav");
@@ -140,6 +141,7 @@ class AllyShip extends SpaceObject
       {
         finalScore = score;
         gameOver = true;
+        rocket = false;
         if(frameCount % 60 == 0)
         {
           explosion.rewind();
